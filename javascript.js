@@ -1,4 +1,13 @@
 function getComputerChoice(){
-    console.log(Math.floor(Math.random()*3));
+    let result = Math.floor(Math.random()*3);
+    switch(result){
+        case 0:
+            return "Scissors"
+        case 1:
+            return "Paper"
+        case 2:
+            return "Rock"
+    }
 }
-getComputerChoice();
+let choice = getComputerChoice();
+console.log(choice);
