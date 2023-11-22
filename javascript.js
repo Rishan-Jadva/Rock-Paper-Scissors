@@ -50,10 +50,8 @@ function getPlayerChoice(){
     return prompt("Rock, Paper or Scissors?");
 }
 function game(){
-    let count = 0;
     let playerScore=0;
     let computerScore=0;
-    while (count<5){
         computerSelection = getComputerChoice();
         playerSelection = getPlayerChoice();
         outcome = playRound(playerSelection, computerSelection);
@@ -67,7 +65,7 @@ function game(){
         console.log(outcome);
         console.log("Your Score: "+playerScore);
         console.log("Computer Score: "+computerScore);
-    }
+    
     if(playerScore>computerScore){
         console.log("Player Wins")
     }
@@ -76,6 +74,33 @@ function game(){
     }
     else{
         console.log("Computer Wins")
-    }
-}
-game();
+    }}
+
+document.addEventListener('DOMContentLoaded', () =>{
+    const rockBtn = document.createElement('button');
+    const paperBtn = document.createElement('button');
+    const scissorsBtn = document.createElement('button');
+
+    const body = document.querySelector('body');
+    body.appendChild(rockBtn);
+    body.appendChild(paperBtn);
+    body.appendChild(scissorsBtn);
+
+    rockBtn.textContent = 'Rock';
+    paperBtn.textContent = 'Paper';
+    scissorsBtn.textContent = 'Scissors';
+
+    const div = document.createElement('div');
+    body.appendChild(div);
+})
+
+document.addEventListener('click', (event) =>{
+    let target = event.target;
+    const div = document.querySelector('div');
+    let compChoice = getComputerChoice();
+    div.innerHTML = `Your move: ${target.textContent}<br>
+                       Computer's move: ${compChoice}<br>
+                       Result: ${playRound(target.textContent, compChoice)}`;
+})
+
+
