@@ -50,8 +50,10 @@ function getPlayerChoice(){
     return prompt("Rock, Paper or Scissors?");
 }
 function game(){
+    let count=0;
     let playerScore=0;
     let computerScore=0;
+    while(count<=5){
         computerSelection = getComputerChoice();
         playerSelection = getPlayerChoice();
         outcome = playRound(playerSelection, computerSelection);
@@ -74,7 +76,11 @@ function game(){
     }
     else{
         console.log("Computer Wins")
-    }}
+    }
+    }
+        }
+
+
 
 document.addEventListener('DOMContentLoaded', () =>{
     const rockBtn = document.createElement('button');
@@ -93,14 +99,42 @@ document.addEventListener('DOMContentLoaded', () =>{
     const div = document.createElement('div');
     body.appendChild(div);
 })
-
+let playerScore = 0;
+let computerScore = 0;
 document.addEventListener('click', (event) =>{
     let target = event.target;
     const div = document.querySelector('div');
     let compChoice = getComputerChoice();
-    div.innerHTML = `Your move: ${target.textContent}<br>
+    let result = playRound(target.textContent, compChoice);
+    if(result == 'You Won!'){
+        playerScore++;
+    }
+    else if(result == 'You Lose!') {
+        computerScore++;
+    }
+    if(playerScore>=5){
+        div.innerHTML = `Your move: ${target.textContent}<br>
                        Computer's move: ${compChoice}<br>
-                       Result: ${playRound(target.textContent, compChoice)}`;
+                       Result: ${result}<br>
+                       Your Score: ${playerScore}<br>
+                       Computer Score: ${computerScore}<br>
+                       You Win!!!`
+    }
+    else if(computerScore>=5){
+        div.innerHTML = `Your move: ${target.textContent}<br>
+                       Computer's move: ${compChoice}<br>
+                       Result: ${result}<br>
+                       Your Score: ${playerScore}<br>
+                       Computer Score: ${computerScore}<br>
+                       Computer Wins!!!`
+    }
+    else{
+        div.innerHTML = `Your move: ${target.textContent}<br>
+                       Computer's move: ${compChoice}<br>
+                       Result: ${result}<br>
+                       Your Score: ${playerScore}<br>
+                       Computer Score: ${computerScore}`;
+                    }
 })
 
 
